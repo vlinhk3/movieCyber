@@ -1,0 +1,504 @@
+/* GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  color: #717171;
+  overflow-x: hidden;
+}
+/* phủ vào 1 vùng sẽ hiện màu */
+::selection {
+  background: #ec7532;
+  color: #fff;
+}
+
+.section {
+  padding: 75px 0;
+}
+.title {
+  color: #ec7532;
+  font-size: 1.125rem;
+  border-bottom: 1px solid #d8d8d8;
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+  margin-bottom: 40px;
+}
+.title::after {
+  content: "";
+  display: block;
+  background: linear-gradient(to right, #fbbd61, #ec7532);
+  width: 125px;
+  height: 4px;
+  margin-top: 20px;
+}
+.title--white {
+  color: #fff;
+  border-bottom: 1px solid #333;
+}
+/* LineStyle */
+.line::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 3px;
+  /*  -giá trị 1: hướng trải màu:
+        to right: trái qua phải
+        to left: phải qua trái
+        to bottom: trên xuống
+        to top: dưới lên
+        Phụ thuộc hướng trải màu
+        -giá trị thứ 2: màu bắt đầu (trái)
+        -giá trị thứ 3: màu kết thúc (phải)
+    */
+  background: linear-gradient(to right, #fbbd61, #ec7532);
+  box-shadow: 0 0 20px 0#fbbd61;
+  transition: all 0.5s;
+}
+.line:hover::after {
+  width: 100%;
+}
+.line.active::after {
+  width: 100%;
+}
+/* HEADER */
+header {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  overflow: hidden;
+}
+#headerFixed {
+  background-color: #101010;
+  position: fixed;
+  top: 0;
+  width: 101%;
+  transform: translate(-50%, -100%);
+  z-index: 100;
+  transition: transform 0.5s;
+
+}
+header p {
+  font-size: 14px;
+  font-weight: 700;
+}
+#movieNavbar .navbar-nav {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+#movieNavbar .navbar-nav .nav-link {
+  color: #fff;
+  letter-spacing: 3px;
+  line-height: 0.8em;
+  padding: 20px 24px;
+}
+/* CAROUSEL */
+#carouselMovie {
+  /* fix cứng 650px để toàn bộ các laptop, mobile ảnh hưởng */
+  height: 650px;
+}
+/* Gọi thẻ chiếm vị trí quan trọng để thừa hưởng 100% height */
+#carouselMovie .carousel-inner {
+  height: 100%;
+}
+#carouselMovie .carousel-item {
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+
+}
+#carouselMovie .carousel-item:first-child {
+  background-image: url(../img/hero-1.jpg);
+}
+#carouselMovie .carousel-item:nth-child(2) {
+  background-image: url(../img/hero-2.jpg);
+}
+#carouselMovie .carousel-item:nth-child(3) {
+  background-image: url(../img/hero-3.jpg);
+}
+#carouselMovie .carousel-caption {
+  text-align: left;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#carouselMovie .carousel-caption p:first-of-type {
+  color: #fbbd61;
+  font-size: 0.875rem;
+  letter-spacing: 2px;
+  margin-bottom: 0;
+  animation-delay: 0.5s;
+}
+#carouselMovie .carousel-caption p:last-of-type {
+  font-size: 1.125rem;
+  margin-bottom: 20px;
+}
+#carouselMovie .carousel-caption h2 {
+  font-size: 3.25rem;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+.movieCarousel__trailer {
+  animation-delay: 0.5s;
+}
+.movieCarousel__trailer > span {
+  display: inline-block;
+  text-align: center;
+  line-height: 48px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  font-size: 0.8rem;
+  margin-right: 8px;
+}
+.movieCarousel__trailer button {
+  padding: 12px 24px;
+  border: none;
+  letter-spacing: 4px;
+  font-size: 0.8rem;
+  border-radius: 30px;
+  color: #fff;
+  background: linear-gradient(to right, #fbbd61, #ec7532);
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+.movieCarousel__trailer button:hover {
+  color: #fff;
+}
+/* B1: Xây dựng overlay phủ lên button */
+.movieCarousel__trailer button::before {
+  content: "";
+  display: block;
+  width: 110%;
+  height: 100%;
+  background: #ec7532;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Sử dụng transform phải viết chung 1 hàng nếu không thằng dứi sẽ đè mất transfrom thằng trên */
+  /* chưa hover */
+  transform: translateX(-100%);
+  transition: all 0.5s;
+}
+.movieCarousel__trailer button:hover:before {
+  transform: skewX(30deg) translateX(-10px);
+}
+.movieCarousel__trailer button span {
+  position: relative;
+  z-index: 10;
+}
+#carouselMovie .carousel-indicators {
+  justify-content: flex-start;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0 15px;
+}
+#carouselMovie .carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background-color: transparent;
+  opacity: 1;
+  box-sizing: border-box;
+  background-clip: border-box;
+}
+#carouselMovie .carousel-indicators li.active {
+  background-color: #fff;
+}
+.movieCarousel__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #000, transparent);
+}
+  /* NEW IN */
+.newIn__title {
+  text-align: center;
+} 
+.newIn__title h3 {
+  font-size: 18px;
+  color: #4a4a4a;
+  margin: 1rem 0;
+}
+.newIn__title div i {
+  color: #fbbd61;
+}
+.newIn__img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.newIn__overlay {
+  width: 200%;
+  height: 102%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, #fbbd61, #ec7532);
+  transform: translateX(-150%) skew(30deg);
+  transition: 0.5s;
+  opacity: 0.9;
+}
+.newIn__img:hover .newIn__overlay {
+  transform: skewX(30deg) translateX(-30%);
+}
+.newIn__play {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: 0.5s;
+
+}
+.newIn__img:hover .newIn__play {
+  opacity: 1;
+}
+.newIn__play i {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 80px;
+  transform: scale(1);
+  transition: 0.5s;
+}
+.newIn__play i:hover {
+  transform: scale(0.9);
+}
+.newIn__play a {
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 4px;
+  display: block;
+  margin: 1rem 0;
+}
+.newIn__play p {
+  color: #fff;
+}
+  /* SHOWTIMES */
+.showTime .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  border: none;
+}
+.showTime .nav-tabs .nav-link.active {
+  color: #ec7532;
+}
+.showTime .nav-tabs .nav-item {
+  margin-bottom: 0;
+}
+.showTime .nav-tabs .nav-link {
+  border: none;
+  padding: 0;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: #4a4a4a;
+}
+
+.showTime .nav-tabs .nav-link span{
+  padding: 15px 30px;
+  display: inline-block;
+}
+.showTime__row {
+  border-bottom: 1px solid #d8d8d8;
+}
+#myTabContent .showTime__row:last-child{
+  border-bottom: none;
+}
+.showTime__row img {
+  border-radius: 10px;
+}
+.showTime__row div p:first-of-type {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #ec7532;
+  margin-bottom: 0;
+}
+.showTime__row div h3 {
+  font-size: 24px;
+  font-weight: 300;
+  color: #101010;
+  letter-spacing: 1px;
+}
+.showTime__row a {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #ec7532;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+.showTime__row a:hover {
+  color: #101010;
+}
+.showTime__runningTimes {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #4a4a4a; ;
+}
+.showTime__runningTimes button{
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #717171;
+  background-color: #d8d8d8;
+}
+.showTime__mins span:last-child{
+  width: 33px;
+  height: 33px;
+  display: inline-block;
+  color: #fff;
+  background-color: #4a4a4a;
+  text-align: center;
+  line-height: 33px;
+  border-radius: 50%;
+  font-weight: 700;
+}
+  /* COMING SOON */
+.comingSoon {
+  /* background-image: url(../img/slide-3.png); */
+  background: url(../img/slide-3.png) #101010;
+  background-size: cover;
+  color: #fff;
+}
+.comingSoon .comingSoon__type {
+  font-size: 14px;
+  color: #ec7532;
+  letter-spacing: 2px;
+}
+.comingSoon h3 {
+  font-size: 34px;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+.comingSoon__rating > i {
+  color: #fbbd61;
+}
+.comingSoon p {
+  margin: 1rem 0;
+}
+.comingSoon a {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #ec7532;
+  text-decoration: none ;
+  transition: 0.5s;
+}
+.comingSoon a:hover {
+  color: #fff;
+}
+.comingSoon__video {
+  position: relative;
+  cursor: pointer;
+}
+.comingSoon__video i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  border: 1px solid #ec7532;
+  border-radius: 50%;
+  font-size: 25px;
+  transition: 0.5s;
+  color: #fff;
+}
+.comingSoon__video:hover i {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+  /* MOVIE LIST */
+.movieList {
+  background: #101010;
+}
+.movieList__item {
+  position: relative;
+  transition: 0.5s;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.movieList__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #101010;
+  opacity: 0.6;
+  transition: 0.5s;
+  
+}
+.movieList__item:hover .movieList__overlay {
+  opacity: 0;
+}
+  /* COnTACT */
+.contact__content {
+  text-align: center;
+  font-size: 23px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+.contact__content p:first-of-type{
+  font-size: 23px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: #4a4a4a;
+} 
+.contact__content a {
+  text-decoration: none;
+  font-size: 46px;
+  color: #fbbd61;
+}
+  /* FOOTER */
+footer {
+  background: #101010;
+}
+footer h3 {
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #ec7532;
+  margin-bottom: 15px;
+}
+footer li {
+  list-style: none;
+}
+footer li a {
+  font-size: 13px;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  padding: 3px 0;
+  transition: 0.5s;
+}
+footer li a:hover {
+  color: #fbbd61;
+  text-decoration: none;
+}
+.footer__copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+
+}
+footer .footer__copyright p{
+  margin-bottom: 0;
+}

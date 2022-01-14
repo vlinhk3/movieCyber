@@ -1,0 +1,47 @@
+@media screen and (max-width: 991.98px) {
+  /* HEADER */
+  header .navbar-brand {
+    max-width: 180px;
+  }
+  header .navbar-brand img {
+    max-width: 100%;
+  }
+  #movieNavbar .navbar-nav .nav-link {
+    font-size: 14px;
+    padding: 20px 11px;
+    letter-spacing: 2px;
+  }
+}
+@media screen and (max-width: 767.98px) {
+  /* GLOBAL */
+  .line.active::after {
+    width: 0;
+  }
+  /* HEADER */
+  header .navbar-toggler {
+    color: #fbbd61;
+  }
+  header .navbar-toggler:focus {
+    outline: none;
+  }
+  #movieNavbar .navbar-nav {
+    background: rgba(0, 0, 0, 0.9);
+    text-align: center;
+  }
+  #movieNavbar .navbar-nav .active .nav-link {
+    color: #ec7532;
+  }
+
+  /* CAROUSEL */
+  #carouselMovie .carousel-caption h2 {
+    font-size: 2.3rem;
+  }
+
+  /* SHOWTIME */
+  .showTime .nav-tabs .nav-link {
+    font-size: 16px;
+  }
+  .showTime .nav-tabs .nav-link span {
+    padding: 10px 20px;
+}
+}
